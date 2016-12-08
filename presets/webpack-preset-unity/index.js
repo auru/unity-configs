@@ -24,8 +24,8 @@ function createConfig(CWD) {
     const nodeModulesPath = path.join(CWD, '/node_modules');
     const indexHtmlPath = path.resolve(CWD, 'index.html');
     const faviconPath = path.resolve(CWD, 'favicon.png');
-    const buildPath = path.join(CWD, '/build');
     const package = require(CWD + '/package.json');
+    const buildPath = path.join(CWD, '/build/' + package.version);
 
     let Dashboard;
     let DashboardPlugin;
@@ -52,9 +52,9 @@ function createConfig(CWD) {
         output: {
             path: buildPath,
             pathinfo: isDevelopmentMode,
-            filename: isDevelopmentMode ? 'bundle.js' : '[name].' + package.version + '.js',
-            chunkFilename: isProductionMode && '[name].' + package.version + '.chunk.js',
-            publicPath: '/'
+            filename: isDevelopmentMode ? 'bundle.js' : '[name].js',
+            chunkFilename: isProductionMode && '[name].chunk.js',
+            publicPath: '/build/' + package.version + '/'
         },
         resolve: {
             extensions: [ '', '.js', '.jsx', '.json' ]
@@ -169,7 +169,7 @@ function createConfig(CWD) {
                         screw_ie8: true // eslint-disable-line camelcase
                     }
                 }),
-                new ExtractTextPlugin('[name].' + package.version + '.css')
+                new ExtractTextPlugin('[name].css')
             ]
         )
     }

@@ -44,6 +44,7 @@ module.exports = {
     },
 
     rules: {
+        'camelcase': OFF,
         'indent': [CRITICAL, 4],
         'space-before-function-paren': [CRITICAL, 'never'],
         'no-unused-vars': [CRITICAL, {vars: 'local', args: 'none'}],

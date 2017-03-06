@@ -122,7 +122,9 @@ function createConfig(CWD) {
         },
         plugins: [
             dashboard && new DashboardPlugin(dashboard.setData),
-            new LodashModuleReplacementPlugin(),
+            new LodashModuleReplacementPlugin({
+                paths: true
+            }),
             new webpack.DefinePlugin({ 
                 'process.env.NODE_ENV': isDevelopmentMode ? '"development"' : '"production"',
                 IS_DEVELOP: isDevelopmentMode

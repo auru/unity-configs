@@ -13,7 +13,7 @@ const isDashboardMode = (process.env.DASHBOARD !== 'false');
 
 /**
  * Fabric function thar creates config object
- * 
+ *
  * @param {String} CWD – Current working directory
  * @returns {Object} – Generated configs
  */
@@ -87,10 +87,10 @@ function createConfig(CWD) {
                     test: /\.(css|less)$/,
                     include: [ srcPath ],
                     loader: (function () {
-                        const cssLoaders = 'css!csso!less!postcss'; 
-                        
-                        return isDevelopmentMode ? 
-                            'style!' + cssLoaders : 
+                        const cssLoaders = 'css!csso!less!postcss';
+
+                        return isDevelopmentMode ?
+                            'style!' + cssLoaders :
                             ExtractTextPlugin.extract('style', cssLoaders);
                     })()
                 },
@@ -123,9 +123,12 @@ function createConfig(CWD) {
         plugins: [
             dashboard && new DashboardPlugin(dashboard.setData),
             new LodashModuleReplacementPlugin({
+                shorthands: true,
+                flattening: true,
+                cloning: true,
                 paths: true
             }),
-            new webpack.DefinePlugin({ 
+            new webpack.DefinePlugin({
                 'process.env.NODE_ENV': isDevelopmentMode ? '"development"' : '"production"',
                 IS_DEVELOP: isDevelopmentMode
             }),
@@ -177,4 +180,4 @@ function createConfig(CWD) {
     }
 }
 
-module.exports = createConfig; 
+module.exports = createConfig;
